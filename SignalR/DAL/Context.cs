@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using SignalR.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,10 @@ namespace SignalR.DAL
 {
     public class Context :IdentityDbContext
     {
-        public Context(DbContextOptions<Context> options)
+        public Context(DbContextOptions<Context> options):base(options)
         {
 
         }
+        public DbSet<AppUser> appUsers { get; set; }
     }
 }

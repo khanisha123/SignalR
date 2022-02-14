@@ -28,7 +28,14 @@
 </div>
 <div class="row">
     <div class="col-6">
-        <ul id="messagesList"></ul>
+        <ul>
+            @foreach (var item in ViewBag.Users)
+            {
+                <li id="@item.Id" style="list-style:none;">
+                    <span class="@(item.ConnectionId == null?"gray":"green")" style="height:10px;width:10px;border-radius:50%;display:inline-block;">@item.FullName <a asp-controller="Home" asp-action="ShowUserAlert" asp-route-id="@item.Id">send</a></span>
+                </li>
+            }
+        </ul>
     </div>
 </div>
 
@@ -45,7 +52,13 @@
         })
 
         connection.on("RecieveMesage", function (user, message) {
-            console.log(user + " " + message);
+            let li = document.getElementById(id);
+            $(li).find("span").removeClass("gray");
+            $(li).find("span").addClass("green");
+        })
+        connection.on("ShowAlert", function (id) {
+
+            alert("okay");
         })
     </script>
 }
